@@ -1,57 +1,185 @@
-const axios = require("axios")
+require('dotenv').config();
 
-const recipes = [
-    "https://www.allrecipes.com/recipe/240400/skillet-chicken-bulgogi/",
-    "https://www.allrecipes.com/recipe/219164/the-best-parmesan-chicken-bake/",
-    // "https://www.allrecipes.com/recipe/266796/greek-chicken-couscous-bowl/",
-    // "https://www.allrecipes.com/recipe/241559/honey-mustard-chicken-with-roasted-vegetables/",
-    // "https://www.allrecipes.com/recipe/212721/indian-chicken-curry-murgh-kari/",
-    // "https://www.allrecipes.com/recipe/238844/korean-fried-chicken/",
-    // "https://www.allrecipes.com/recipe/233983/mamaws-chicken-and-rice-casserole/",
-    // "https://www.allrecipes.com/recipe/273664/chicken-alfredo-bake/",
-    // "https://www.allrecipes.com/recipe/255038/sheet-pan-chicken-fajitas/",
-    // "https://www.allrecipes.com/recipe/220751/quick-chicken-piccata/",
-    // "https://www.allrecipes.com/recipe/244951/amazingly-tasty-and-crispy-chicken-schnitzel/",
-    // "https://www.allrecipes.com/recipe/257938/spicy-thai-basil-chicken-pad-krapow-gai/",
-    // "https://www.allrecipes.com/recipe/272544/baked-lemon-butter-chicken-thighs/",
-    // "https://www.allrecipes.com/recipe/25184/slow-cooker-chicken-creole/",
-    // "https://www.allrecipes.com/recipe/233983/mamaws-chicken-and-rice-casserole/",
-    // "https://www.allrecipes.com/recipe/241890/grilled-chicken-marinade/",
-    // "https://www.allrecipes.com/recipe/213666/best-city-chicken/",
-    // "https://www.allrecipes.com/recipe/231644/chicken-souvlaki-with-tzatziki-sauce/",
-    // "https://www.allrecipes.com/recipe/236609/honey-garlic-slow-cooker-chicken-thighs/",
-    // "https://www.allrecipes.com/recipe/72068/chicken-katsu/",
-    // "https://www.allrecipes.com/recipe/54202/greek-style-garlic-chicken-breast/",
-    // "https://www.allrecipes.com/recipe/216159/perfect-chicken/",
-    // "https://www.allrecipes.com/recipe/257568/grilled-greek-chicken/",
-    // "https://www.allrecipes.com/recipe/8626/yummy-honey-chicken-kabobs/",
-    // "https://www.allrecipes.com/recipe/244951/amazingly-tasty-and-crispy-chicken-schnitzel/",
-    // "https://www.allrecipes.com/recipe/8887/chicken-marsala/",
-    // "https://www.allrecipes.com/recipe/240208/simple-baked-chicken-breasts/",
-    // "https://www.allrecipes.com/recipe/61024/asian-orange-chicken/",
-    // "https://www.allrecipes.com/recipe/9023/baked-teriyaki-chicken/",
-    // "https://www.allrecipes.com/recipe/235151/crispy-and-tender-baked-chicken-thighs/",
-    // "https://www.allrecipes.com/recipe/230620/mayo-chicken/",
-    // "https://www.allrecipes.com/recipe/64513/rosemary-ranch-chicken-kabobs/",
-    // "https://www.allrecipes.com/recipe/279903/garlic-brown-sugar-chicken-thighs/",
-    // "https://www.allrecipes.com/recipe/18350/baked-spaghetti-with-chicken/",
-    // "https://www.allrecipes.com/recipe/242352/greek-lemon-chicken-and-potatoes/",
-    // "https://www.allrecipes.com/recipe/55860/baked-garlic-parmesan-chicken/"
+const axios = require("axios")
+const jsdom = require('jsdom')
+const dom = new jsdom.JSDOM("")
+const $ = require('jquery')(dom.window)
+
+require('./server/models/database');
+const Category = require('./server/models/category');
+const Recipe = require('./server/models/recipe');
+
+const categories = [
+  'African',
+  'Asian',
+  'Australian and New Zealander',
+  'European',
+  'Middle Eastern',
+  'North American',
+  'South American'
 ]
 
-recipes.forEach((link) => {
-  axios({
-    method: 'POST',
-    url: 'https://mycookbook-io1.p.rapidapi.com/recipes/rapidapi',
-    headers: {
-      'content-type': 'text/plain',
-      'X-RapidAPI-Key': 'c40f28eed7msh4f7bf990d9b3cdcp1834e8jsn2e899f166837',
-      'X-RapidAPI-Host': 'mycookbook-io1.p.rapidapi.com'
-    },
-    data: link
-  }).then((response) => {
-    console.log(response.data)
-  }).catch((error) => {
-    console.error(error)
+// TODO: add an actual image for the category
+const categoryImages = {
+  'African': '/img/african-cuisine.jpeg',
+  'Asian': '/img/asian-cuisine.jpeg',
+  'Australian and New Zealander': '/img/australian-and-new-zealander-cuisine.jpeg',
+  'European': '/img/european-cuisine.jpeg',
+  'Middle Eastern': '/img/middle-eastern-cuisine.jpeg',
+  'North American': '/img/north-american-cuisine.jpeg',
+  'South American': '/img/south-american-cuisine.jpeg'
+}
+
+const categoryLinks = {
+  'African': 'https://www.allrecipes.com/recipes/226/world-cuisine/african/',
+  'Asian': 'https://www.allrecipes.com/recipes/227/world-cuisine/asian/',
+  'Australian and New Zealander': 'https://www.allrecipes.com/recipes/228/world-cuisine/australian-and-new-zealander/',
+  'European': 'https://www.allrecipes.com/recipes/231/world-cuisine/european/',
+  'Middle Eastern': 'https://www.allrecipes.com/recipes/235/world-cuisine/middle-eastern/',
+  'North American': 'https://www.allrecipes.com/recipes/236/us-recipes/',
+  'South American': 'https://www.allrecipes.com/recipes/237/world-cuisine/latin-american/'
+}
+
+const recipes = {
+  'African': [],
+  'Asian': [],
+  'Australian and New Zealander': [],
+  'European': [],
+  'Middle Eastern': [],
+  'North American': [],
+  'South American': []
+}
+
+const initCategories = async () => {
+  console.log('>>>>> Init Categories Start')
+
+  const promisesA = []
+  const promisesB = []
+
+  categories.forEach((category) => {
+    const promiseA = Category.findOne({ name: category }).then((result) => {
+      if (result) {
+        console.log(`Category ${category} Already Exist`)
+      } else {
+        const promiseB = Category.create({ name: category, image: categoryImages[category] }).then(() => {
+          console.log(`Category ${category} Created`)
+        })
+        promisesB.push(promiseB)
+      }
+    })
+    promisesA.push(promiseA)
   })
-})
+
+  await Promise.all(promisesA)
+  await Promise.all(promisesB)
+
+  console.log('<<<<< Init Categories Completed')
+}
+
+const getRecipeLinks = async () => {
+  console.log('>>>>> Getting Recipe Links For Category')
+  const promises = []
+
+  categories.forEach((category) => {
+    const request = axios({
+      method: 'GET',
+      url: categoryLinks[category]
+    }).then((resp) => {
+      console.log(`>>> Starting ${category}`)
+      const recipeLinks = $(resp.data).find('.card .card__imageContainer .card__titleLink')
+      recipeLinks.each((i, link) => {
+        recipes[category].push($(link).attr('href'))
+      })
+      console.log(`<<< Completed ${category}`)
+    })
+
+    promises.push(request)
+  })
+
+  await Promise.all(promises)
+  console.log('<<<<< Completed Recipe Links For Category')
+}
+
+const createRecipes = async () => {
+  console.log('>>>>> Creating Recipes')
+  // Loop categories
+  categories.forEach((category) => {
+    // For every category find the appropriate category document
+    Category.findOne({ name: category }).then((categoryResult) => {
+      const categoryId = categoryResult._id
+
+      // Loop the recipes for the selected category
+      recipes[category].forEach((link) => {
+        // For every recipe link, grab data from rapid api
+        axios({
+          method: 'POST',
+          url: 'https://mycookbook-io1.p.rapidapi.com/recipes/rapidapi',
+          headers: {
+            'content-type': 'text/plain',
+            'X-RapidAPI-Key': 'c40f28eed7msh4f7bf990d9b3cdcp1834e8jsn2e899f166837',
+            'X-RapidAPI-Host': 'mycookbook-io1.p.rapidapi.com'
+          },
+          data: link
+        }).then((resp) => {
+          const rawData = resp.data[0]
+
+          const dataToSave = {
+            email: 'admin@recipe.com',
+            name: rawData.name,
+            description: rawData.description,
+            instructions: rawData.instructions[0].steps,
+            ingredients: rawData.ingredients,
+            image: rawData.images[0],
+            categories: [categoryId]
+          }
+
+          Recipe.findOne({ name: rawData.name }).then((result) => {
+            if (result) {
+              console.log(`>>> SKIPPED ${category} ${rawData.name}`)
+            } else {
+              Recipe.create(dataToSave).then((recipeResult) => {
+                console.log(`>>> CREATED ${category} ${rawData.name}`)
+                const recipeId = recipeResult._id
+
+                categoryResult.updateOne({
+                  $push: {
+                    recipes: [recipeId]
+                  }
+                }).then((updateResult) => {
+                  console.log(updateResult)
+                }).catch((err) => {
+                  console.log('Category Update Error', err)
+                })
+              }).catch((err) => {
+                console.log('Recipe Creation Error', err)
+              })
+            }
+          }).catch((err) => {
+            console.log('Recipe Search Error', err)
+          })
+        }).catch((err) => {
+          console.log('Rapid API Error', err)
+        })
+      })
+    }).catch((err) => {
+      console.log('Category Result Error', err)
+    })
+  })
+}
+
+const start = async () => {
+  await initCategories()
+  await getRecipeLinks()
+  await createRecipes()
+}
+
+start()
+
+
+// Recipe.findOne({ _id: '62b9812e45d1b419be01fe20' }).populate('categories').then((result) => {
+//   console.log(result)
+// })
+
+// Category.findOne({ _id: '62b9861a11ac4e50fc0fa542' }).populate('recipes').then((result) => {
+//   console.log(result)
+// })

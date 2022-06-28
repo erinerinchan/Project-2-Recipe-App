@@ -1,31 +1,36 @@
 const mongoose = require('mongoose');
 
 const recipeSchema = new mongoose.Schema({
-  name: {
+  email: {
     type: String,
     required: 'This field is required.'
+  },
+  name: {
+    type: String,
+    required: 'This field is required.',
+    index: true
   },
   description: {
     type: String,
-    required: 'This field is required.'
+    required: 'This field is required.',
+    index: true
   },
-  email: {
-    type: String,
+  instructions: {
+    type: Array,
     required: 'This field is required.'
   },
   ingredients: {
     type: Array,
     required: 'This field is required.'
   },
-  category: {
-    type: String,
-    enum: ['African', 'Asian', 'Middle Eastern', 'European', 'Western'],
-    required: 'This field is required.'
-  },
   image: {
     type: String,
     required: 'This field is required.'
   },
+  categories: [{
+    type: 'ObjectId',
+    ref: 'category'
+  }]
 });
 
 module.exports = mongoose.model('recipe', recipeSchema);
