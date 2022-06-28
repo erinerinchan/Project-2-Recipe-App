@@ -11,5 +11,6 @@ router.get('/categories', recipeController.exploreCategories);
 router.get('/categories/:categoryName', recipeController.exploreCategoriesById);
 router.get('/search', recipeController.searchRecipe);
 router.get('/explore-latest', recipeController.exploreLatest);
+router.get('/explore-random', recipeController.exploreRandom);
 
 module.exports = router;
