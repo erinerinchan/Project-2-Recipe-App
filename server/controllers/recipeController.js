@@ -3,6 +3,8 @@ const fs = require('fs')
 const Category = require('../models/category');
 const Recipe = require('../models/recipe');
 
+// const nodemailer = require('nodemailer');
+
 /**
  * GET /
  * Homepage
@@ -230,5 +232,41 @@ exports.about = async (req, res) => {
  * Contact
  */
 exports.contact = async (req, res) => {
-  res.render('contact', { title: 'Contact'} );
+  res.render('contact', { qs: req.query } );
+}
+
+/**
+ * POST /contact
+ * Contact
+ */
+exports.contactOnPost = async (req, res) => {
+  console.log(req.body);
+  // res.send('Message received!')
+  // res.render('contact', { qs: req.query})
+  res.render('contact-success', {data: req.body})
+
+  // const transporter = nodemailer.createTransport({
+  //   service: 'gmail',
+  //   auth: {
+  //     user: 'erinchanyh@gmail.com',
+  //     pass: 'password01!'
+  //   }
+  // });
+
+  // const mailOptions = {
+  //   from: req.body.email,
+  //   to: 'erinchanyh@gmail.com',
+  //   subject: `Message from ${req.body.email}: ${req.body.subject}`,
+  //   text: req.body.message
+  // }
+
+  // transporter.sendMail(mailOptions, (error, info) => {
+  //   if(error) {
+  //     console.log(error);
+  //     res.send('error');
+  //   } else {
+  //     console.log('Email sent: ' + info.response);
+  //     res.send('success');
+  //   }
+  // })
 }

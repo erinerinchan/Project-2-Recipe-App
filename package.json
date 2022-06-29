@@ -20,6 +20,7 @@
   "homepage": "https://github.com/erinerinchan/Project-2-Recipe-App#readme",
   "dependencies": {
     "axios": "^0.27.2",
+    "body-parser": "^1.20.0",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.1",
@@ -34,7 +35,8 @@
     "lodash": "^4.17.21",
     "mongodb": "^4.7.0",
     "mongoose": "^6.4.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "nodemailer": "^6.7.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.18"
