@@ -1,4 +1,5 @@
 require('../models/database');
+const fs = require('fs')
 const Category = require('../models/category');
 const Recipe = require('../models/recipe');
 
@@ -134,4 +135,100 @@ exports.exploreRandom = async (req, res) => {
   } catch (error) {
     res.status(500).send({ message: error.message || "Error occured" });
   }
+}
+
+/**
+ * GET /submit-recipe
+ * Submit Recipes
+ */
+exports.submitRecipe = async (req, res) => {
+  const infoErrorsObj = req.flash('infoErrors');
+  const infoSubmitObj = req.flash('infoSubmit');
+  res.render('submit-recipe', { title: 'Cooking Blog - Submit Recipes', infoErrorsObj, infoSubmitObj});
+}
+
+/**
+ * POST /submit-recipe
+ * Submit Recipes
+ */
+exports.submitRecipeOnPost = async (req, res) => {
+  try {
+    let imageUploadFile;
+    let uploadPath;
+
+    if(!req.files || Object.keys(req.files).length === 0) {
+      console.log('No files were uploaded.');
+    } else {
+      imageUploadFile = req.files.image;
+      uploadPath = require('path').resolve('./') + '/public/uploads/' + imageUploadFile.newFilename;
+
+      fs.rename(imageUploadFile.filepath, uploadPath, (err) => {
+        if(err) return res.status(500).send(err);
+      })
+    }
+
+    const category = await Category.findOne({
+      name: req.body.category
+    })
+
+    const newRecipe = await Recipe.create({
+      name: req.body.name,
+      description: req.body.description,
+      email: req.body.email,
+      instructions: req.body.instructions,
+      ingredients: req.body.ingredients,
+      categories: [category._id],
+      image: `/uploads/${imageUploadFile.newFilename}`
+    });
+
+    await category.updateOne({
+      $push: {
+        recipes: [newRecipe._id]
+      }
+    })
+
+    req.flash('infoSubmit', 'Recipe has been added.');
+    res.redirect('/submit-recipe');
+  } catch (error) {
+    console.log(error)
+    req.flash('infoErrors', error);
+    res.redirect('/submit-recipe');
+  }
+}
+
+// async function deleteRecipe() {
+//   try {
+//     await Recipe.deleteOne({ name: 'asdf' });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+// deleteRecipe();
+
+// async function updateRecipe() {
+//   try {
+//     const res = await Recipe.updateOne({ name: 'old recipe' }, { name: 'new recipe' });
+//     res.n; // Number of documents matched
+//     res.nModified; // Number of documents modified
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+// updateRecipe();
+
+
+/**
+ * GET /about
+ * About
+ */
+exports.about = async (req, res) => {
+  res.render('about', { title: 'About'} );
+}
+
+/**
+ * GET /contact
+ * Contact
+ */
+exports.contact = async (req, res) => {
+  res.render('contact', { title: 'Contact'} );
 }
