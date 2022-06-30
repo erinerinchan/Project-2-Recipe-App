@@ -1,29 +1,52 @@
+<!-- Contact page -->
 <div class="px-4 py-5 my-5 text-center">
   <h1 class="display-5 fw-bold">Get in touch</h1>
-  <p>For any inquiries, contact me here: </p>
+  <p>For any inquiries, contact me here:</p>
 </div>
 
+<!-- Contact form -->
 <div class="row justify-content-center">
-
   <div class="col-8">
     <form action="/contact" enctype="multipart/form-data" method="POST">
+      <!-- Full name -->
       <div class="col-12">
         <label for="full-name" class="form-label">Full Name*</label>
-        <input type="text" name="full-name" id="full-name" class="form-control">
+        <input
+          type="text"
+          name="full-name"
+          id="full-name"
+          class="form-control"
+        />
       </div>
-      <br>
+      <br />
+
+      <!-- Email -->
       <div class="col-12">
         <label for="email" class="form-label">Email*</label>
-        <input type="email" name="email" id="email" class="form-control">
+        <input type="email" name="email" id="email" class="form-control" />
       </div>
-      <br>
+      <br />
+
+      <!-- Message -->
       <div class="col-12">
         <label for="message" class="form-label">Message*</label>
-        <textarea name ="message" id="message" class="form-control" cols="30" rows="4"></textarea>
+        <textarea
+          name="message"
+          id="message"
+          class="form-control"
+          cols="30"
+          rows="4"
+        ></textarea>
       </div>
-      <br>
+      <br />
       <div class="col-12">
-        <button type="send" class="btn btn-primary" value="send-message">Send</button>
+        <button
+          type="send"
+          class="btn btn-primary btn-dark"
+          value="send-message"
+        >
+          Send
+        </button>
       </div>
     </form>
   </div>

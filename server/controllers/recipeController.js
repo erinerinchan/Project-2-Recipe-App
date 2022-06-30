@@ -1,9 +1,8 @@
-require('../models/database');
-const fs = require('fs')
-const Category = require('../models/category');
-const Recipe = require('../models/recipe');
-
-const nodemailer = require('nodemailer');
+require("../models/database");
+const fs = require("fs");
+const Category = require("../models/category");
+const Recipe = require("../models/recipe");
+const nodemailer = require("nodemailer");
 
 /**
  * GET /
@@ -11,23 +10,42 @@ const nodemailer = require('nodemailer');
  */
 exports.homepage = async (req, res) => {
   try {
+    // Limit the number of cards for 'categories of recipes' and 'latest recipes' to 5
     const limitNumber = 5;
 
-    // Categories
+    // Finding categories of recipes
     const categories = await Category.find({}).limit(limitNumber);
 
-    // Recipes
+    // Finding latest recipes
     const latest = await Recipe.find({}).sort({ _id: -1 }).limit(limitNumber);
 
-    // Category Recipes | { name: '', image: '', recipes: [] }
-    const african = await Category.findOne({ name: 'African' }).populate({ path: 'recipes', options: { limit: 5 } });
-    const asian = await Category.findOne({ name: 'Asian' }).populate({ path: 'recipes', options: { limit: 5 } });
-    const australian_and_new_zealander = await Category.findOne({ name: 'Australian and New Zealander'}).populate({ path: 'recipes', options: { limit: 5 } });
-    const european = await Category.findOne({ name: 'European' }).populate({ path: 'recipes', options: { limit: 5 } });
-    const middle_eastern = await Category.findOne({ name: 'Middle Eastern'}).populate({ path: 'recipes', options: { limit: 5 } });
-    const north_american = await Category.findOne({ name: 'North American' }).populate({ path: 'recipes', options: { limit: 5 } });
-    const south_american = await Category.findOne({ name: 'South American' }).populate({ path: 'recipes', options: { limit: 5 } });
+    //Selecting only that category, populating that category with 5 recipes belonging to that category at most
+    const african = await Category.findOne({ name: "African" }).populate({
+      path: "recipes",
+      options: { limit: 5 },
+    });
+    const asian = await Category.findOne({ name: "Asian" }).populate({
+      path: "recipes",
+      options: { limit: 5 },
+    });
+    const australian_and_new_zealander = await Category.findOne({
+      name: "Australian and New Zealander",
+    }).populate({ path: "recipes", options: { limit: 5 } });
+    const european = await Category.findOne({ name: "European" }).populate({
+      path: "recipes",
+      options: { limit: 5 },
+    });
+    const middle_eastern = await Category.findOne({
+      name: "Middle Eastern",
+    }).populate({ path: "recipes", options: { limit: 5 } });
+    const north_american = await Category.findOne({
+      name: "North American",
+    }).populate({ path: "recipes", options: { limit: 5 } });
+    const south_american = await Category.findOne({
+      name: "South American",
+    }).populate({ path: "recipes", options: { limit: 5 } });
 
+    // Showing latest recipes and recipes sorted by categories
     const recipes = {
       latest,
       african: african?.recipes || [],
@@ -36,142 +54,200 @@ exports.homepage = async (req, res) => {
       european: european?.recipes || [],
       middle_eastern: middle_eastern?.recipes || [],
       north_american: north_american?.recipes || [],
-      south_american: south_american?.recipes || []
+      south_american: south_american?.recipes || [],
     };
 
-    res.render('index', { title: 'Cooking Blog - Home', categories, recipes });
+    res.render("index", { title: "Cooking Blog - Home", categories, recipes });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).send({ message: error.message || "Error occured" });
   }
-}
+};
 
 /**
  * GET /categories
- * Categories
+ * 'Explore categories' page
  */
 exports.exploreCategories = async (req, res) => {
   try {
+    // Limiting the number of cards for recipes on each category to 20
     const limitNumber = 20;
+
+    // Finding categories of recipes
     const categories = await Category.find({}).limit(limitNumber);
 
-    res.render('categories', { title: 'Cooking Blog - Categories', categories });
+    res.render("categories", {
+      title: "Cooking Blog - Categories",
+      categories,
+    });
   } catch (error) {
     res.status(500).send({ message: error.message || "Error occured" });
   }
-}
+};
 
 /**
  * GET /categories/:id
- * Categories By Id
+ * Sorting 'Explore categories' page by Id
  */
 exports.exploreCategoriesById = async (req, res) => {
   try {
+    // Accessing each category name
     let categoryName = req.params.categoryName;
+
+    // Limiting the number of cards for recipes on each category to 20
     const limitNumber = 20;
+
+    // Selecting only the category name
     const category = await Category.findOne({ name: categoryName });
-    const categoryById = await Recipe.find({ categories: { $in: [category._id] } }).populate('categories').limit(limitNumber);
-    res.render('categories', { title: 'Cooking Blog - Categories', categoryById });
+
+    // Finding recipes that match a specific Id and populating the Id with the recipes
+    const categoryById = await Recipe.find({
+      categories: { $in: [category._id] },
+    })
+      .populate("categories")
+      .limit(limitNumber);
+
+    res.render("categories", {
+      title: "Cooking Blog - Categories",
+      categoryById,
+    });
   } catch (error) {
     res.status(500).send({ message: error.message || "Error occured" });
   }
-}
+};
 
 /**
  * GET /recipe/:id
- * Recipe
+ * Individual recipe page
  */
 exports.exploreRecipe = async (req, res) => {
   try {
+    // Accessing each recipe via Id
     let recipeId = req.params.id;
+
+    // Finding a specific recipe by Id
     const recipe = await Recipe.findById(recipeId);
-    res.render('recipe', { title: 'Cooking Blog - Recipes', recipe});
+
+    res.render("recipe", { title: "Cooking Blog - Recipes", recipe });
   } catch (error) {
     res.status(500).send({ message: error.message || "Error occured" });
   }
-}
+};
 
 /**
  * POST /search
- * Search
+ * Search page
  */
 exports.searchRecipe = async (req, res) => {
   try {
+    // Obtaining the user's search input
     let searchTerm = req.query.searchTerm;
+
+    // Finding recipe results that match the user's search input and distinguishing similar recipe results
     let recipes = await Recipe.find({
       $text: {
         $search: searchTerm,
-        $diacriticSensitive: true
-      }
+        $diacriticSensitive: true,
+      },
     });
-    res.render('search', { title: 'Cooking Blog - Search', recipes });
+
+    res.render("search", { title: "Cooking Blog - Search", recipes });
   } catch (error) {
     res.status(500).send({ message: error.message || "Error occured" });
   }
-}
+};
 
 /**
  * GET /explore-latest
- * Explore Latest
+ * 'Explore Latest' page
  */
 exports.exploreLatest = async (req, res) => {
   try {
+    // Limiting the number of cards for latest recipes to 20
     const limitNumber = 20;
+
+    // Finding 20 latest recipes at most sorted by Id(descending)
     const recipe = await Recipe.find({}).sort({ _id: -1 }).limit(limitNumber);
-    res.render('explore-latest', { title: 'Cooking Blog - Explore latest', recipe});
+
+    res.render("explore-latest", {
+      title: "Cooking Blog - Explore latest",
+      recipe,
+    });
   } catch (error) {
     res.status(500).send({ message: error.message || "Error occured" });
   }
-}
+};
 
 /**
  * GET /explore-random
- * Explore Random as JSON
+ * 'Explore random recipes' page
  */
 exports.exploreRandom = async (req, res) => {
   try {
+    // Finding the count of recipes in the database
     let count = await Recipe.find().countDocuments();
+
+    // Generating random count of recipes
     let random = Math.floor(Math.random() * count);
+
+    // Finding one amongst all random recipes
     let recipe = await Recipe.findOne().skip(random).exec();
-    res.render('explore-random', { title: 'Cooking Blog - Explore latest', recipe});
+
+    res.render("explore-random", {
+      title: "Cooking Blog - Explore latest",
+      recipe,
+    });
   } catch (error) {
     res.status(500).send({ message: error.message || "Error occured" });
   }
-}
+};
 
 /**
  * GET /submit-recipe
- * Submit Recipes
+ * 'Submit recipes' page
  */
 exports.submitRecipe = async (req, res) => {
-  const infoErrorsObj = req.flash('infoErrors');
-  const infoSubmitObj = req.flash('infoSubmit');
-  res.render('submit-recipe', { title: 'Cooking Blog - Submit Recipes', infoErrorsObj, infoSubmitObj});
-}
+  // Generating 'error' message for submit failure
+  const infoErrorsObj = req.flash("infoErrors");
+
+  // Generating 'submit' message for submit success
+  const infoSubmitObj = req.flash("infoSubmit");
+
+  res.render("submit-recipe", {
+    title: "Cooking Blog - Submit Recipes",
+    infoErrorsObj,
+    infoSubmitObj,
+  });
+};
 
 /**
  * POST /submit-recipe
- * Submit Recipes
+ * 'Submit recipes' page
  */
 exports.submitRecipeOnPost = async (req, res) => {
   try {
     let imageUploadFile;
     let uploadPath;
 
-    if(!req.files || Object.keys(req.files).length === 0) {
-      console.log('No files were uploaded.');
+    // Image upload
+    if (!req.files || Object.keys(req.files).length === 0) {
+      console.log("No files were uploaded.");
     } else {
       imageUploadFile = req.files.image;
-      uploadPath = require('path').resolve('./') + '/public/uploads/' + imageUploadFile.newFilename;
+      uploadPath =
+        require("path").resolve("./") +
+        "/public/uploads/" +
+        imageUploadFile.newFilename;
 
       fs.rename(imageUploadFile.filepath, uploadPath, (err) => {
-        if(err) return res.status(500).send(err);
-      })
+        if (err) return res.status(500).send(err);
+      });
     }
 
+    // Creating new recipes
     const category = await Category.findOne({
-      name: req.body.category
-    })
+      name: req.body.category,
+    });
 
     const newRecipe = await Recipe.create({
       name: req.body.name,
@@ -180,36 +256,44 @@ exports.submitRecipeOnPost = async (req, res) => {
       instructions: req.body.instructions,
       ingredients: req.body.ingredients,
       categories: [category._id],
-      image: `/uploads/${imageUploadFile.newFilename}`
+      image: `/uploads/${imageUploadFile.newFilename}`,
     });
 
     await category.updateOne({
       $push: {
-        recipes: [newRecipe._id]
-      }
-    })
+        recipes: [newRecipe._id],
+      },
+    });
 
-    req.flash('infoSubmit', 'Recipe has been added.');
-    res.redirect('/submit-recipe');
+    // Showing the 'Recipe has been added' message following submit success
+    req.flash("infoSubmit", "Recipe has been added.");
+
+    // Redirecting user to an empty submit page following submit success
+    res.redirect("/submit-recipe");
   } catch (error) {
-    console.log(error)
-    req.flash('infoErrors', error);
-    res.redirect('/submit-recipe');
-  }
-}
+    // Showing the error message following submit failure
+    console.log(error);
+    req.flash("infoErrors", error);
 
+    // Redirecting user to an empty submit page following submit success
+    res.redirect("/submit-recipe");
+  }
+};
+
+/* Delete recipes */
 // async function deleteRecipe() {
 //   try {
-//     await Recipe.deleteOne({ name: 'asdf' });
+//     await Recipe.deleteOne({ name: '' });
 //   } catch (error) {
 //     console.log(error);
 //   }
 // }
 // deleteRecipe();
 
+/* Update recipes */
 // async function updateRecipe() {
 //   try {
-//     const res = await Recipe.updateOne({ name: 'old recipe' }, { name: 'new recipe' });
+//     const res = await Recipe.updateOne({ name: '' }, { name: '' });
 //     res.n; // Number of documents matched
 //     res.nModified; // Number of documents modified
 //   } catch (error) {
@@ -218,55 +302,54 @@ exports.submitRecipeOnPost = async (req, res) => {
 // }
 // updateRecipe();
 
-
 /**
  * GET /about
  * About
  */
 exports.about = async (req, res) => {
-  res.render('about', { title: 'About'} );
-}
+  res.render("about", { title: "About" });
+};
 
 /**
  * GET /contact
- * Contact
+ * Contact page
  */
 exports.contact = async (req, res) => {
-  res.render('contact', { qs: req.query } );
-}
+  res.render("contact", { qs: req.query });
+};
 
 /**
  * POST /contact
- * Contact
+ * Contact page
  */
 exports.contactOnPost = async (req, res) => {
   console.log(req.body);
 
-  //Nodemailer
+  // Setting up Nodemailer
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: "gmail",
     auth: {
-      user: 'hungrybeastfood@gmail.com',
-      pass: 'ixnjywjcvsssgiva'
-    }
+      user: "hungrybeastfood@gmail.com",
+      pass: "ixnjywjcvsssgiva",
+    },
   });
 
   const mailOptions = {
     from: req.body.email,
-    to: 'hungrybeastfood@gmail.com',
+    to: "hungrybeastfood@gmail.com",
     subject: `Message from ${req.body.email}: ${req.body.name}`,
-    text: req.body.message
-  }
+    text: req.body.message,
+  };
 
   transporter.sendMail(mailOptions, (error, info) => {
-    if(error) {
+    if (error) {
       console.log(error);
-      res.send('error');
+      res.send("error");
     } else {
-      console.log('Email sent: ' + info.response);
-      res.send('success');
+      console.log("Email sent: " + info.response);
+      res.send("success");
     }
   });
 
-  res.render('contact-success', {data: req.body})
-}
+  res.render("contact-success", { data: req.body });
+};

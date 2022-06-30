@@ -1,35 +1,39 @@
-const formidable = require('formidable')
-const _ = require('lodash')
-const fs = require('fs')
+const formidable = require("formidable");
+const _ = require("lodash");
+const fs = require("fs");
 
-const dirname = `./tmp`
+const dirname = `./tmp`;
 
-if (!fs.existsSync(dirname)) fs.mkdirSync(dirname)
+if (!fs.existsSync(dirname)) fs.mkdirSync(dirname);
 
 const parseData = (req, res, next) => {
-  const form = formidable({ uploadDir: dirname, keepExtensions: true, multiples: true })
+  const form = formidable({
+    uploadDir: dirname,
+    keepExtensions: true,
+    multiples: true,
+  });
 
-  if (req?.headers?.['content-type']?.includes('multipart/form-data')) {
+  if (req?.headers?.["content-type"]?.includes("multipart/form-data")) {
     form.parse(req, (err, fields, files) => {
-      if (err) return res.status(500).json(err)
+      if (err) return res.status(500).json(err);
 
-      req.body = fields
-      req.files = files
+      req.body = fields;
+      req.files = files;
 
       Object.keys(files).forEach((key) => {
         if (files[key].size > 0) {
-          _.set(req.body, key, files[key])
+          _.set(req.body, key, files[key]);
         } else {
-          fs.unlinkSync(files[key].filepath)
-          delete req.files[key]
+          fs.unlinkSync(files[key].filepath);
+          delete req.files[key];
         }
-      })
+      });
 
-      return next()
-    })
+      return next();
+    });
   } else {
-    next()
+    next();
   }
-}
+};
 
-module.exports = parseData
+module.exports = parseData;

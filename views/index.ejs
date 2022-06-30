@@ -1,34 +1,55 @@
+<!-- Homepage -->
 <div class="row flex-lg-row-reverse align-items-center g-5 py-4 mb-4">
+  <!-- Image -->
   <div class="col-12 col-lg-6">
-    <img src="/img/food-mugshot.jpeg" width="600" class="d-block mx-lg-auto img-fluid" Loading="lazy"
-      alt="Cooking With Node.js" />
+    <img
+      src="/img/food-mugshot.jpeg"
+      width="600"
+      class="d-block mx-lg-auto img-fluid"
+      Loading="lazy"
+      alt="Cooking With Node.js"
+    />
   </div>
 
   <div class="col-12 col-lg-6">
+    <!-- Description -->
     <h1 class="display-5 fw-bold mb-3">Welcome to Hungry Beast</h1>
     <p class="lead">Explore a range of tasty recipes from around the world.</p>
 
+    <!-- Buttons for 'Latest recipes' and 'Generate a random recipe' -->
     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-      <a href="/explore-latest" class="btn btn-primary btn-dark btn-lg px-4 me-md-2">Latest recipes</a>
-      <a href="/explore-random" class="btn btn-outline-secondary btn-lg px-4 me-md-2">Generate a random recipe</a>
+      <a
+        href="/explore-latest"
+        class="btn btn-primary btn-dark btn-lg px-4 me-md-2"
+        >Latest recipes</a
+      >
+      <a
+        href="/explore-random"
+        class="btn btn-outline-secondary btn-lg px-4 me-md-2"
+        >Generate a random recipe</a
+      >
     </div>
   </div>
 </div>
 
-<!-- Categories Start -->
+<!-- Categories of recipes start -->
 <div class="row row-cols-2 row-cols-lg-6 g-2 g-lg-3 py-4">
-  <% if(categories != '' ) { %>
-    <% categories.forEach(function(category, index) { %>
-      <a href="/categories/<%- category.name %>" class="col text-center category__link">
-        <div class="category__img shadow">
-          <img src="img/<%- category.image %>" alt="<%- category.name %>" Loading="lazy" />
-        </div>
-        <div class="pt-1">
-          <%- category.name %>
-        </div>
-      </a>
-    <% })%>
-  <% } %>
+  <% if(categories != '' ) { %> <% categories.forEach(function(category, index)
+  { %>
+  <a
+    href="/categories/<%- category.name %>"
+    class="col text-center category__link"
+  >
+    <div class="category__img shadow">
+      <img
+        src="img/<%- category.image %>"
+        alt="<%- category.name %>"
+        Loading="lazy"
+      />
+    </div>
+    <div class="pt-1"><%- category.name %></div>
+  </a>
+  <% })%> <% } %>
 
   <a href="/categories" class="col text-center category__link">
     <div class="category__img shadow">
@@ -37,9 +58,9 @@
     <div class="pt-1">View All</div>
   </a>
 </div>
-<!-- Categories End -->
+<!-- Categories of recipes end -->
 
-<!-- Latest Start -->
+<!-- Latest recipes start -->
 <section class="pb-4 pt-4">
   <div class="d-flex mb-2 align-items-center">
     <h2>Latest recipes</h2>
@@ -47,21 +68,24 @@
   </div>
 
   <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-    <% if(recipes.latest && recipes.latest.length > 0) { %>
-      <% recipes.latest.forEach(function(recipe, index){ %>
-      <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
-        <div class="category__img">
-          <img src="<%= recipe.image %>" alt="<%= recipe.name %>" Loading="lazy">
-        </div>
-        <div class="pt-1"><%= recipe.name %></div>
-      </a>
-      <%}) %>
-    <% } else { %>
-      <p>No items found.</p>
+    <% if(recipes.latest && recipes.latest.length > 0) { %> <%
+    recipes.latest.forEach(function(recipe, index){ %>
+    <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
+      <div class="category__img">
+        <img
+          src="<%= recipe.image %>"
+          alt="<%= recipe.name %>"
+          Loading="lazy"
+        />
+      </div>
+      <div class="pt-1"><%= recipe.name %></div>
+    </a>
+    <%}) %> <% } else { %>
+    <p>No items found.</p>
     <% } %>
   </div>
 </section>
-<!-- Latest End -->
+<!-- Latest recipes end -->
 
 <!-- African recipes start -->
 <section class="pb-4 pt-4">
@@ -71,20 +95,22 @@
   </div>
 
   <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-    <% if(recipes.african && recipes.african.length > 0) { %>
-      <% recipes.african.forEach(function(recipe, index){ %>
-      <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
-        <div class="category__img">
-          <img src="<%= recipe.image %>" alt="<%= recipe.name %>" Loading="lazy">
-        </div>
-        <div class="pt-1"><%= recipe.name %></div>
-      </a>
-      <%}) %>
-    <% } else { %>
-      <p>No items found.</p>
+    <% if(recipes.african && recipes.african.length > 0) { %> <%
+    recipes.african.forEach(function(recipe, index){ %>
+    <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
+      <div class="category__img">
+        <img
+          src="<%= recipe.image %>"
+          alt="<%= recipe.name %>"
+          Loading="lazy"
+        />
+      </div>
+      <div class="pt-1"><%= recipe.name %></div>
+    </a>
+    <%}) %> <% } else { %>
+    <p>No items found.</p>
     <% } %>
   </div>
-
 </section>
 <!-- African recipes end -->
 
@@ -96,17 +122,20 @@
   </div>
 
   <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-    <% if(recipes.asian && recipes.asian.length > 0) { %>
-      <% recipes.asian.forEach(function(recipe, index){ %>
-      <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
-        <div class="category__img">
-          <img src="<%= recipe.image %>" alt="<%= recipe.name %>" Loading="lazy">
-        </div>
-        <div class="pt-1"><%= recipe.name %></div>
-      </a>
-      <%}) %>
-    <% } else { %>
-      <p>No items found.</p>
+    <% if(recipes.asian && recipes.asian.length > 0) { %> <%
+    recipes.asian.forEach(function(recipe, index){ %>
+    <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
+      <div class="category__img">
+        <img
+          src="<%= recipe.image %>"
+          alt="<%= recipe.name %>"
+          Loading="lazy"
+        />
+      </div>
+      <div class="pt-1"><%= recipe.name %></div>
+    </a>
+    <%}) %> <% } else { %>
+    <p>No items found.</p>
     <% } %>
   </div>
 </section>
@@ -120,17 +149,21 @@
   </div>
 
   <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-    <% if(recipes.australian_and_new_zealander && recipes.australian_and_new_zealander.length > 0) { %>
-      <% recipes.australian_and_new_zealander.forEach(function(recipe, index){ %>
-      <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
-        <div class="category__img">
-          <img src="<%= recipe.image %>" alt="<%= recipe.name %>" Loading="lazy">
-        </div>
-        <div class="pt-1"><%= recipe.name %></div>
-      </a>
-      <%}) %>
-    <% } else { %>
-      <p>No items found.</p>
+    <% if(recipes.australian_and_new_zealander &&
+    recipes.australian_and_new_zealander.length > 0) { %> <%
+    recipes.australian_and_new_zealander.forEach(function(recipe, index){ %>
+    <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
+      <div class="category__img">
+        <img
+          src="<%= recipe.image %>"
+          alt="<%= recipe.name %>"
+          Loading="lazy"
+        />
+      </div>
+      <div class="pt-1"><%= recipe.name %></div>
+    </a>
+    <%}) %> <% } else { %>
+    <p>No items found.</p>
     <% } %>
   </div>
 </section>
@@ -144,17 +177,20 @@
   </div>
 
   <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-    <% if(recipes.european && recipes.european.length > 0) { %>
-      <% recipes.european.forEach(function(recipe, index){ %>
-      <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
-        <div class="category__img">
-          <img src="<%= recipe.image %>" alt="<%= recipe.name %>" Loading="lazy">
-        </div>
-        <div class="pt-1"><%= recipe.name %></div>
-      </a>
-      <%}) %>
-    <% } else { %>
-      <p>No items found.</p>
+    <% if(recipes.european && recipes.european.length > 0) { %> <%
+    recipes.european.forEach(function(recipe, index){ %>
+    <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
+      <div class="category__img">
+        <img
+          src="<%= recipe.image %>"
+          alt="<%= recipe.name %>"
+          Loading="lazy"
+        />
+      </div>
+      <div class="pt-1"><%= recipe.name %></div>
+    </a>
+    <%}) %> <% } else { %>
+    <p>No items found.</p>
     <% } %>
   </div>
 </section>
@@ -168,17 +204,20 @@
   </div>
 
   <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-    <% if(recipes.middle_eastern && recipes.middle_eastern.length > 0) { %>
-      <% recipes.middle_eastern.forEach(function(recipe, index){ %>
-      <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
-        <div class="category__img">
-          <img src="<%= recipe.image %>" alt="<%= recipe.name %>" Loading="lazy">
-        </div>
-        <div class="pt-1"><%= recipe.name %></div>
-      </a>
-      <%}) %>
-    <% } else { %>
-      <p>No items found.</p>
+    <% if(recipes.middle_eastern && recipes.middle_eastern.length > 0) { %> <%
+    recipes.middle_eastern.forEach(function(recipe, index){ %>
+    <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
+      <div class="category__img">
+        <img
+          src="<%= recipe.image %>"
+          alt="<%= recipe.name %>"
+          Loading="lazy"
+        />
+      </div>
+      <div class="pt-1"><%= recipe.name %></div>
+    </a>
+    <%}) %> <% } else { %>
+    <p>No items found.</p>
     <% } %>
   </div>
 </section>
@@ -192,17 +231,20 @@
   </div>
 
   <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-    <% if(recipes.north_american && recipes.north_american.length > 0) { %>
-      <% recipes.north_american.forEach(function(recipe, index){ %>
-      <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
-        <div class="category__img">
-          <img src="<%= recipe.image %>" alt="<%= recipe.name %>" Loading="lazy">
-        </div>
-        <div class="pt-1"><%= recipe.name %></div>
-      </a>
-      <%}) %>
-    <% } else { %>
-      <p>No items found.</p>
+    <% if(recipes.north_american && recipes.north_american.length > 0) { %> <%
+    recipes.north_american.forEach(function(recipe, index){ %>
+    <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
+      <div class="category__img">
+        <img
+          src="<%= recipe.image %>"
+          alt="<%= recipe.name %>"
+          Loading="lazy"
+        />
+      </div>
+      <div class="pt-1"><%= recipe.name %></div>
+    </a>
+    <%}) %> <% } else { %>
+    <p>No items found.</p>
     <% } %>
   </div>
 </section>
@@ -216,29 +258,40 @@
   </div>
 
   <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-    <% if(recipes.south_american && recipes.north_american.length > 0) { %>
-      <% recipes.south_american.forEach(function(recipe, index){ %>
-      <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
-        <div class="category__img">
-          <img src="<%= recipe.image %>" alt="<%= recipe.name %>" Loading="lazy">
-        </div>
-        <div class="pt-1"><%= recipe.name %></div>
-      </a>
-      <%}) %>
-    <% } else { %>
-      <p>No items found.</p>
+    <% if(recipes.south_american && recipes.north_american.length > 0) { %> <%
+    recipes.south_american.forEach(function(recipe, index){ %>
+    <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
+      <div class="category__img">
+        <img
+          src="<%= recipe.image %>"
+          alt="<%= recipe.name %>"
+          Loading="lazy"
+        />
+      </div>
+      <div class="pt-1"><%= recipe.name %></div>
+    </a>
+    <%}) %> <% } else { %>
+    <p>No items found.</p>
     <% } %>
   </div>
 </section>
 <!-- South American recipes end -->
 
-<!-- Submit Start -->
+<!-- Submit recipes start -->
 <section class="px-4 py-5 my-5 text-center">
-  <img src="img/publish-recipe.jpeg" class="d-block mx-auto mb-4 img-fluid" alt="Share your recipes!" width="566"
-    height="208" Loading="lazy" />
+  <img
+    src="img/publish-recipe.jpeg"
+    class="d-block mx-auto mb-4 img-fluid"
+    alt="Share your recipes!"
+    width="566"
+    height="208"
+    Loading="lazy"
+  />
   <h1 class="display-5 fw-bold">Share your recipes!</h1>
   <div class="col-lg-6 mx-auto">
-    <a href="/submit-recipe" class="btn btn-primary btn-dark btn-lg">Submit recipes</a>
+    <a href="/submit-recipe" class="btn btn-primary btn-dark btn-lg"
+      >Submit recipes</a
+    >
   </div>
 </section>
-<!-- Submit End -->
+<!-- Submit recipes end -->

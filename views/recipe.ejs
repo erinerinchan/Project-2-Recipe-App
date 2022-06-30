@@ -1,5 +1,7 @@
+<!-- Individual recipe page -->
 <% if(recipe != null) { %>
 
+  <!-- Breadcrumb markup -->
   <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -9,6 +11,7 @@
 
 <div class="row">
 
+  <!-- Recipe image and name -->
   <div class="col-12 col-md-4">
     <img src="<%- recipe.image %>" class="img-fluid sticky-top" style="top: 20px;" alt="<%- recipe.name %>" Loading="lazy">
   </div>
@@ -16,12 +19,22 @@
   <div class="col-12 col-md-8">
 
     <div class="row">
+
+      <!-- Recipe name -->
       <div class="col-12"><h1><%- recipe.name %></h1></div>
-      <div class="col-12 mb-4"><i class="bi bi-tag"></i> <%- recipe.category %></div>
+
+      <!-- Tag -->
+      <div class="col-12 mb-4"><i class="bi bi-tag"></i></div>
+
+      <!-- Description-->
       <div class="col-12">
         <h4>Description</h4>
+        <br>
+        <%= recipe.description %>
+        <ul>
       </div>
 
+      <!-- Instructions -->
       <div class="col-12" style="white-space: pre-line;">
         <h4>Instructions</h4>
         <ul class="list-group list-group-flush">
@@ -30,8 +43,10 @@
           <% }) %>
         <ul>
       </div>
+
     </div>
 
+    <!-- Ingredients -->
     <div class="row pt-4">
       <div class="col-12">
         <h4>Ingredients</h4>
@@ -42,6 +57,7 @@
         <ul>
       </div>
     </div>
+
   </div>
 </div>
 <% } else { %>

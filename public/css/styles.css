@@ -1,11 +1,14 @@
+/* Font */
 :root {
-  --bs-font-sans-serif: 'Rubik', sans serif;
+  --bs-font-sans-serif: "Rubik", sans serif;
 }
 
+/* Container */
 .container-xxL {
   max-width: 1530px;
 }
 
+/* Background image and color */
 body {
   background-image: url("/img/background.webp");
   background-color: rgb(243, 243, 243);
@@ -15,7 +18,7 @@ a {
   color: var(--bs-dark);
 }
 
-/* Category Card */
+/* Recipe cards */
 .category__link {
   text-align: center;
   display: block;
@@ -33,7 +36,7 @@ a {
   align-items: center;
   height: 100px;
   margin-bottom: 10px;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, .16);
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
   overflow: hidden;
   border-radius: 8px;
 }

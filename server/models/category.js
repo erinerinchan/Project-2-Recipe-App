@@ -1,19 +1,22 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
+// Schema for categories of recipes
 const categorySchema = new mongoose.Schema({
   name: {
     type: String,
-    required: 'This field is required.',
-    index: true
+    required: "This field is required.",
+    index: true,
   },
   image: {
     type: String,
-    required: 'This field is required.'
+    required: "This field is required.",
   },
-  recipes: [{
-    type: 'ObjectId',
-    ref: 'recipe'
-  }]
+  recipes: [
+    {
+      type: "ObjectId",
+      ref: "recipe",
+    },
+  ],
 });
 
-module.exports = mongoose.model('category', categorySchema);
+module.exports = mongoose.model("category", categorySchema);
