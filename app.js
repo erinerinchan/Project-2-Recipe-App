@@ -2,7 +2,7 @@
 require("dotenv").config();
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
-const session = require("express-session");
+const session = require("cookie-session");
 const cookieParser = require("cookie-parser");
 const flash = require("connect-flash");
 const morgan = require("morgan");

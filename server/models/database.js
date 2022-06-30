@@ -1,15 +1,20 @@
 const mongoose = require("mongoose");
+
+// Connection
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
-
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", function () {
+}).then(() => {
   console.log("Connected");
-});
+}).catch((err) => {
+  console.log("Connection Error: ", err)
+})
 
 //Models
-require("./category");
-require("./recipe");
+const Category = mongoose.model("category", require('./category'));
+const Recipe = mongoose.model("recipe", require('./recipe'));
+
+module.exports = {
+  Category,
+  Recipe
+}

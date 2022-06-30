@@ -1,8 +1,7 @@
-require("../models/database");
 const fs = require("fs");
-const Category = require("../models/category");
-const Recipe = require("../models/recipe");
 const nodemailer = require("nodemailer");
+
+const { Category, Recipe } = require("../models/database");
 
 /**
  * GET /
@@ -239,9 +238,7 @@ exports.submitRecipeOnPost = async (req, res) => {
         "/public/uploads/" +
         imageUploadFile.newFilename;
 
-      fs.rename(imageUploadFile.filepath, uploadPath, (err) => {
-        if (err) return res.status(500).send(err);
-      });
+      fs.renameSync(imageUploadFile.filepath, uploadPath)
     }
 
     // Creating new recipes

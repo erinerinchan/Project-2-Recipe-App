@@ -2,9 +2,13 @@ const formidable = require("formidable");
 const _ = require("lodash");
 const fs = require("fs");
 
-const dirname = `./tmp`;
+const dirname = process.env.NODE_ENV === "production" ? '/tmp' : './tmp';
 
-if (!fs.existsSync(dirname)) fs.mkdirSync(dirname);
+console.log('has tmp', fs.existsSync(dirname))
+if (!fs.existsSync(dirname)) {
+  console.log('created tmp')
+  fs.mkdirSync(dirname);
+}
 
 const parseData = (req, res, next) => {
   const form = formidable({
