@@ -1,7 +1,7 @@
-const fs = require("fs");
 const nodemailer = require("nodemailer");
 
 const { Category, Recipe } = require("../models/database");
+const uploadFileAsync = require('../_helpers/upload-file')
 
 /**
  * GET /
@@ -225,37 +225,29 @@ exports.submitRecipe = async (req, res) => {
  */
 exports.submitRecipeOnPost = async (req, res) => {
   try {
-    let imageUploadFile;
-    let uploadPath;
-
-    // Image upload
-    if (!req.files || Object.keys(req.files).length === 0) {
-      console.log("No files were uploaded.");
-    } else {
-      imageUploadFile = req.files.image;
-      uploadPath =
-        require("path").resolve("./") +
-        "/public/uploads/" +
-        imageUploadFile.newFilename;
-
-      fs.renameSync(imageUploadFile.filepath, uploadPath)
-    }
-
-    // Creating new recipes
+    // Find Category
     const category = await Category.findOne({
       name: req.body.category,
     });
 
-    const newRecipe = await Recipe.create({
+    // Recipe to save
+    const recipeToSave = {
       name: req.body.name,
       description: req.body.description,
       email: req.body.email,
       instructions: req.body.instructions,
       ingredients: req.body.ingredients,
       categories: [category._id],
-      image: `/uploads/${imageUploadFile.newFilename}`,
-    });
+      image: req.body.image
+    }
 
+    // Upload File First
+    await uploadFileAsync(recipeToSave, req)
+
+    // Create the actual recipe with data
+    const newRecipe = await Recipe.create(recipeToSave);
+
+    // Update category's recipe relationship
     await category.updateOne({
       $push: {
         recipes: [newRecipe._id],
@@ -270,10 +262,10 @@ exports.submitRecipeOnPost = async (req, res) => {
   } catch (error) {
     // Showing the error message following submit failure
     console.log(error);
-    req.flash("infoErrors", error);
+    // req.flash("infoErrors", error);
 
-    // Redirecting user to an empty submit page following submit success
-    res.redirect("/submit-recipe");
+    // // Redirecting user to an empty submit page following submit success
+    // res.redirect("/submit-recipe");
   }
 };
 

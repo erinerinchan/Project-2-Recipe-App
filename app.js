@@ -43,7 +43,7 @@ app.use(flash());
 app.use(express.urlencoded({ extended: true }));
 
 // Parsing multi-parts to req.body and req.files
-app.use(require("./parse-data"));
+app.use(require("./server/_helpers/parse-data"));
 
 // Defining routes for the server
 app.use("/", require("./server/routes/recipeRoutes.js"));
