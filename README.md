@@ -1,4 +1,4 @@
-# Hungry Beast
+# *Hungry Beast*
 
 ## Description
 
