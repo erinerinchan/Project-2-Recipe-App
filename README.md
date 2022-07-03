@@ -92,7 +92,7 @@ https://floating-gorge-73473.herokuapp.com/
 - Create a `.env` file, and add the following to the file:
 
 ```
-MONGODB_URI=`[The connection string in your MongoDB account]`
+MONGODB_URI=[The connection string in your MongoDB account]
 S3_ACCESS_KEY=[The access key ID in your Amazon Web Service account]
 S3_SECRET_KEY=[The secret access key in your Amazon Web Service account]
 S3_REGION=[The location of your bucket in your Amazon Web Service account]
