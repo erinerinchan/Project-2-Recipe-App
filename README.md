@@ -97,7 +97,6 @@ S3_ACCESS_KEY=[The access key ID in your Amazon Web Service account]
 S3_SECRET_KEY=[The secret access key in your Amazon Web Service account]
 S3_REGION=[The location of your bucket in your Amazon Web Service account]
 S3_BUCKET=[The name of your bucket in your Amazon Web Service account]
-
 ```
 *For the connection string in your MongoDB account, click [here]()*:
 
