@@ -89,7 +89,7 @@ https://floating-gorge-73473.herokuapp.com/
 
 *In the `Project-2-Recipe-App` folder*
 
-- Create an `.env` file, and add the following to the file:
+- Create a `.env` file, and add the following to the file:
 
 ```
 MONGODB_URI=[The connection string in your MongoDB account]
