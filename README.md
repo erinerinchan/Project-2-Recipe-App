@@ -65,7 +65,7 @@ This recipe app is a backend project allowing users to access and search recipes
 
 ### Database
 
-- [MyCookbook.io](https://rapidapi.com/mycookbook/api/mycookbook-io1)
+- [MyCookbook.io](https://rapidapi.com/mycookbook/api/mycookbook-io1)(Where the recipes are fetched from)
 
 ### References
 
@@ -83,11 +83,11 @@ https://floating-gorge-73473.herokuapp.com/
 - Run `cd Project-2-Recipe-App`
 - Run `code .` to open the `Project-2-Recipe-App` folder up in a new window
 
-*In the new window’s terminal*
+*In the new window’s terminal:*
 
 - Run `npm install`
 
-*In the `Project-2-Recipe-App` folder
+*In the `Project-2-Recipe-App` folder*
 
 - Create an `.env` file, and add the following to the file:
 
@@ -102,4 +102,3 @@ S3_BUCKET=[The name of your bucket in your Amazon Web Service account]
 *For the connection string in your MongoDB account, click [here]()*:
 
 *For the access key ID, secret access key, location of your bucket and the name of your bucket in your Amazon Web Service account, click [here]()*:
-
