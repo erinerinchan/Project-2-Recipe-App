@@ -113,7 +113,7 @@ const getRecipeLinks = async () => {
   console.log("<<<<< Completed Recipe Links For Category");
 };
 
-// Creating recipes 
+// Creating recipes
 const createRecipes = async () => {
   console.log(">>>>> Creating Recipes");
   // Loop categories
@@ -132,7 +132,7 @@ const createRecipes = async () => {
             headers: {
               "content-type": "text/plain",
               "X-RapidAPI-Key":
-                "c40f28eed7msh4f7bf990d9b3cdcp1834e8jsn2e899f166837",
+                "process.env.API_KEY",
               "X-RapidAPI-Host": "mycookbook-io1.p.rapidapi.com",
             },
             data: link,
