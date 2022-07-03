@@ -4,7 +4,7 @@
 
 This recipe app is a backend project allowing users to access and search recipes from different continents as well as submit their own recipes.
 
-![alt text](/img/Screenshot.png)
+![alt text](public/img/Screenshot.png)
 ### Main features
 
 - Showing categories of recipes sorted by continents
@@ -15,7 +15,7 @@ This recipe app is a backend project allowing users to access and search recipes
 - Allowing users to submit one recipe at a time in a form, where they have to fill in their email address, the recipe’s name, description, instructions, ingredients, category sorted by continents and upload the recipe’s image
 - Allowing users to submit enquiries in a form, where they have to fill in their name, email address and message
 
-## Resources for creating the project (Languages and dependencies)
+## Resources for creating the project
 
 ### Languages
 
