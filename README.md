@@ -81,9 +81,9 @@ https://floating-gorge-73473.herokuapp.com/
 
 - Run `git clone git@github.com:erinerinchan/Project-2-Recipe-App.git` for SSH key
 - Run `cd Project-2-Recipe-App`
-- Run `code .` to open the `Project-2-Recipe-App` folder up in a new window
+- Run `code .` to open the `Project-2-Recipe-App` folder up in a new code editor window
 
-### In the new window’s terminal
+### In the new code editor window’s terminal
 
 - Run `npm install`
 
@@ -101,3 +101,7 @@ S3_BUCKET=[The name of your bucket in your Amazon Web Service account]
 *For the connection string in your MongoDB account, click [here]()*
 
 *For the access key ID, secret access key, location of your bucket and the name of your bucket in your Amazon Web Service account, click [here]()*
+
+### In the window's terminal
+
+- Run `git status` to make sure your `.env` file is not tracked
