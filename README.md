@@ -72,6 +72,34 @@ This recipe app is a backend project allowing users to access and search recipes
 - [Wireframing](https://www.figma.com/file/OiIt1zovdm9uL7CnTORsCF/Project-2-Wireframing?node-id=0%3A1)
 
 - [API routes](https://docs.google.com/spreadsheets/d/1i1E82H9rPMkHY67rk9PUZV7OFFbpw13j3U0Z9-R-0Hk/edit#gid=0)
-
 ## Link to the project
 https://floating-gorge-73473.herokuapp.com/
+
+## Installation
+
+*In your computer’s or code editor’s terminal*:
+
+- Run `git clone git@github.com:erinerinchan/Project-2-Recipe-App.git` for SSH key
+- Run `cd Project-2-Recipe-App`
+- Run `code .` to open the `Project-2-Recipe-App` folder up in a new window
+
+*In the new window’s terminal*
+
+- Run `npm install`
+
+*In the `Project-2-Recipe-App` folder
+
+- Create an `.env` file, and add the following to the file:
+
+```
+MONGODB_URI=[The connection string in your MongoDB account]
+S3_ACCESS_KEY=[The access key ID in your Amazon Web Service account]
+S3_SECRET_KEY=[The secret access key in your Amazon Web Service account]
+S3_REGION=[The location of your bucket in your Amazon Web Service account]
+S3_BUCKET=[The name of your bucket in your Amazon Web Service account]
+
+```
+*For the connection string in your MongoDB account, click [here]()*:
+
+*For the access key ID, secret access key, location of your bucket and the name of your bucket in your Amazon Web Service account, click [here]()*:
+
