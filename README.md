@@ -65,7 +65,7 @@ This recipe app is a backend project allowing users to access and search recipes
 
 ### Database
 
-- [MyCookbook.io](https://rapidapi.com/mycookbook/api/mycookbook-io1) (Where the recipes are fetched from)
+- [MyCookbook.io](https://rapidapi.com/mycookbook/api/mycookbook-io1) (Where the project's recipes are fetched from)
 
 ### References
 
