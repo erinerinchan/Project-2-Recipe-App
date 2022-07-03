@@ -77,17 +77,17 @@ https://floating-gorge-73473.herokuapp.com/
 
 ## Installation
 
-### In your computer’s or code editor’s terminal:
+### In your computer’s or code editor’s terminal
 
 - Run `git clone git@github.com:erinerinchan/Project-2-Recipe-App.git` for SSH key
 - Run `cd Project-2-Recipe-App`
 - Run `code .` to open the `Project-2-Recipe-App` folder up in a new window
 
-### In the new window’s terminal:
+### In the new window’s terminal
 
 - Run `npm install`
 
-### In the `Project-2-Recipe-App` folder:
+### In the `Project-2-Recipe-App` folder
 
 - Create a `.env` file, and add the following to the file:
 
