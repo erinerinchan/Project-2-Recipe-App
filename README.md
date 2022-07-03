@@ -83,7 +83,7 @@ https://floating-gorge-73473.herokuapp.com/
 - Run `cd Project-2-Recipe-App`
 - Run `code .` to open the `Project-2-Recipe-App` folder up in a new code editor window
 
-### In the new code editor window’s terminal
+### In the new window’s terminal
 
 - Run `npm install`
 
