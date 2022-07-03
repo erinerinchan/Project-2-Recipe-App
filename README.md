@@ -34,7 +34,7 @@ This recipe app is a backend project allowing users to access and search recipes
 - Node.js (JavaScript)
 ### Database program
 
-- [MongoDB](https://www.mongodb.com/)
+- MongoDB
 
 ### ODM library
 
