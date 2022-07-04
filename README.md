@@ -103,7 +103,7 @@ To check the `connection string` in your *MongoDB account*, click [here]().
 
 To check the `access key ID`, `secret access key`, `location of your bucket` and `the name of your bucket` in your *Amazon Web Service account*, click [here]().
 
-To check the `X-RapidAPI-Key` on MyCookbook.io in your *RapidAPI* account, click [here](). 
+To check the `X-RapidAPI-Key` on *MyCookbook.io* in your *RapidAPI* account, click [here]().
 ### In the window's terminal
 
 - Run `git status` to make sure your `.env` file is not tracked
