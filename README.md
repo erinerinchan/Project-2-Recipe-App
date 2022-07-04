@@ -102,7 +102,7 @@ NODEMAILER_PASS=[The Application specific password in your Google account]
 ```
 *To check the `connection string` in your *MongoDB account*, click [here](https://github.com/erinerinchan/MongoDB/blob/main/README.md).
 
-*To check the `access key ID`, `secret access key`, `location of your bucket` and `the name of your bucket` in your *Amazon Web Service account*, click [here]().
+*To check the `access key ID`, `secret access key`, `location of your bucket` and `the name of your bucket` in your *Amazon Web Service account*, click [here](https://github.com/erinerinchan/Amazon-Web-Services/blob/main/README.md#access-key-id-and-secret-access-key).
 
 *To check the `X-RapidAPI-Key` on *MyCookbook.io* in your *RapidAPI* account, click [here]().
 
