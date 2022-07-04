@@ -106,7 +106,7 @@ NODEMAILER_PASS=[The Application specific password in your Google account]
 
 *To check the `X-RapidAPI-Key` on *MyCookbook.io* in your *RapidAPI* account, click [here](https://github.com/erinerinchan/RapidAPI---MyCookbook.io/blob/main/README.md).
 
-*To check the `Application specific password` in your Google account, click [here]().
+*To check the `Application specific password` in your Google account, click [here](https://github.com/erinerinchan/Nodemailer---app-password/blob/main/README.md).
 ### 4. In the window's terminal
 
 - Run `git status` to make sure your `.env` file is not tracked
