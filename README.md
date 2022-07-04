@@ -139,5 +139,5 @@ NODEMAILER_PASS=[The Application specific password in your Google account]
 
 - Run `git push heroku [branch-name:]master` (add `branch-name` if you are not in the master branch)
 - Run `heroku open`
-### Support
+## Support
 If you run into any issues downloading or setting up the project, please feel free to contact me at `erinchanyh@gmail.com`.
