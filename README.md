@@ -5,13 +5,13 @@
 ![alt text](public/img/Screenshot.png)
 ### Main features
 
-- Showing categories of recipes sorted by continents
-- Showing latest recipes
-- Showing continental recipes
-- Showing each recipe with description, instruction and ingredients
-- Allowing users to search for recipes containing specific ingredients
-- Allowing users to submit one recipe at a time in a form, where they have to fill in their email address, the recipe’s name, description, instructions, ingredients, category sorted by continents and upload the recipe’s image
-- Allowing users to submit enquiries in a form, where they have to fill in their name, email address and message
+- Categories of recipes sorted by continents
+- Latest recipes
+- Continental recipes
+- Each recipe comes with description, instruction and ingredients
+- Users can search for recipes containing specific ingredients
+- Users can submit one recipe at a time in a form, where they have to fill in their email address, the recipe’s name, description, instructions, ingredients, category sorted by continents and upload the recipe’s image
+- Users can submit enquiries in a form, where they have to fill in their name, email address and message
 
 ## Resources for creating the project
 
@@ -110,10 +110,10 @@ NODEMAILER_PASS=[The Application specific password in your Google account]
 ### 4. In the window's terminal
 
 - Run `git status` to make sure your `.env` file is not tracked
-## Starting the server
+## Start the server
 
 - Run `nodemon app.js` in the window's terminal, or open `http://localhost:3000` with your browser to see the result
-## Deployment to Heroku
+## Deploy to Heroku
 ### 1. In the window’s terminal
 
 - Run `brew install heroku/brew/heroku` (If you have never installed Heroku before)
@@ -121,7 +121,7 @@ NODEMAILER_PASS=[The Application specific password in your Google account]
 - Run `heroku create` (This create another remote name `heroku` just like `origin`)
 - Run `heroku addons:create papertrail`(This adds a service that will keep your logs)
 - Run `heroku addons:create heroku-postgresql:hobby-dev`(This adds PostgreSQL)
-### 2. Adding env variables (except DATABASE_URL) to Heroku
+### 2. Add env variables (except DATABASE_URL) to Heroku
 
 - Via Heroku account
 	- Login to the account, go to the dashboard and select your app
