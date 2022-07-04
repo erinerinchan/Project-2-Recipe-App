@@ -264,7 +264,7 @@ exports.submitRecipeOnPost = async (req, res) => {
     console.log(error);
     // req.flash("infoErrors", error);
 
-    // // Redirecting user to an empty submit page following submit success
+    // Redirecting user to an empty submit page following submit success
     // res.redirect("/submit-recipe");
   }
 };
@@ -318,14 +318,14 @@ exports.contactOnPost = async (req, res) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "hungrybeastfood@gmail.com",
-      pass: "ixnjywjcvsssgiva",
+      user: "process.env.NODEMAILER_USER",
+      pass: "process.env.NODEMAILER_PASS",
     },
   });
 
   const mailOptions = {
     from: req.body.email,
-    to: "hungrybeastfood@gmail.com",
+    to: "process.env.NODEMAILER_USER",
     subject: `Message from ${req.body.email}: ${req.body.name}`,
     text: req.body.message,
   };
