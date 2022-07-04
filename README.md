@@ -2,7 +2,7 @@
 
 ## Description
 
-This recipe app is a backend project allowing users to access and search recipes from different continents as well as submit their own recipes.
+This recipe app is a backend project allowing users to access and search for recipes from different continents as well as submit their own recipes.
 
 ![alt text](public/img/Screenshot.png)
 ### Main features
@@ -65,7 +65,7 @@ This recipe app is a backend project allowing users to access and search recipes
 
 ### Database
 
-- [MyCookbook.io](https://rapidapi.com/mycookbook/api/mycookbook-io1) (Where the project's recipes are fetched from)
+- [MyCookbook.io](https://rapidapi.com/mycookbook/api/mycookbook-io1) (Where the recipes are fetched from)
 
 ### References
 
@@ -77,17 +77,17 @@ https://floating-gorge-73473.herokuapp.com/
 
 ## Installation
 
-### In your computer’s or code editor’s terminal
+### 1. In your computer’s or code editor’s terminal
 
 - Run `git clone git@github.com:erinerinchan/Project-2-Recipe-App.git` for SSH key
 - Run `cd Project-2-Recipe-App`
 - Run `code .` to open the `Project-2-Recipe-App` folder up in a new code editor window
 
-### In the new window’s terminal
+### 2. In the new window’s terminal
 
 - Run `npm install`
 
-### In the `Project-2-Recipe-App` folder
+### 3. In the `Project-2-Recipe-App` folder
 
 - Create a `.env` file, and add the following to the file:
 
@@ -99,7 +99,7 @@ S3_REGION=[The location of your bucket in your Amazon Web Service account]
 S3_BUCKET=[The name of your bucket in your Amazon Web Service account]
 API_KEY=[The X-RapidAPI-Key on MyCookbook.io in your RapidAPI account]
 NODEMAILER_USER=[Your Gmail address]
-NODEMAILER_PASS=[The *Application specific* password in your Google account]
+NODEMAILER_PASS=[The Application specific password in your Google account]
 
 ```
 *To check the `connection string` in your *MongoDB account*, click [here]().
@@ -109,6 +109,33 @@ NODEMAILER_PASS=[The *Application specific* password in your Google account]
 *To check the `X-RapidAPI-Key` on *MyCookbook.io* in your *RapidAPI* account, click [here]().
 
 *To check the `Application specific password` in your Google account, click [here]().
-### In the window's terminal
+### 4. In the window's terminal
 
 - Run `git status` to make sure your `.env` file is not tracked
+## Starting the server
+
+- Run `nodemon app.js` in the window's terminal, or open `http://localhost:3000` with your browser to see the result
+## Deployment to Heroku
+### 1. In the window’s terminal
+
+- Run `brew install heroku/brew/heroku` (If you have never installed Heroku before)
+- Run `heroku login` (If you haven’t logged in to your Heroku account)
+- Run `heroku create` (This create another remote name `heroku` just like `origin`)
+- Run `heroku addons:create papertrail`(This adds a service that will keep your logs)
+- Run `heroku addons:create heroku-postgresql:hobby-dev`(This adds PostgreSQL)
+### 2. Adding env variables (except DATABASE_URL) to Heroku
+
+- Via Heroku account
+	- Login to the account, go to the dashboard and select your app
+	- Go to `Settings >> Config Vars >> Reveal Config Vars`
+	- Paste all the items from the `.env` file in the `Project-2-Recipe-App` folder
+
+- Or via the window’s terminal / CLI
+	- Run `heroku config:set KEY=value`
+	- Paste all the items from the `.env` file in the `Project-2-Recipe-App` folder
+
+- Add `NODE_ENV=production` to `Reveal Config Vars` in your Heroku account
+### 3. In the window’s terminal
+
+- Run `git push heroku [branch-name:]master` (add `branch-name` if you are not in the master branch)
+- Run `heroku open`
