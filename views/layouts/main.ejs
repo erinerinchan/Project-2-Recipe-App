@@ -1,117 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      <%= typeof title !='undefined' ? title: 'Cooking Blog - Made with Node.js'
-      %>
-    </title>
-    <!-- Bootstrap stylesheet -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <!-- Bootstrap stylesheet - icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css"
-    />
-    <!-- Google fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap"
-      rel="stylesheet"
-    />
-    <!-- Local CSS file -->
-    <link rel="stylesheet" href="/css/styles.css" />
-  </head>
 
-  <body>
-    <!-- Header -->
-    <div class="container-xxl px-md-5 bg-white shadow-lg">
-      <header
-        class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"
-      >
-        <!-- Logo -->
-        <a
-          href="/"
-          class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none"
-        >
-          <img
-            src="/img/recipe_logo.png"
-            width="130"
-            height="130"
-            alt="Cooking Blog - Made with Node.js"
-          />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    <%= typeof title !='undefined' ? title: 'Cooking Blog - Made with Node.js' %>
+  </title>
+  <!-- Bootstrap stylesheet -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap stylesheet - icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css" />
+  <!-- Google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap" rel="stylesheet" />
+  <!-- Local CSS file -->
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+
+<body>
+  <!-- Header -->
+  <div class="container-xxl px-md-5 bg-white shadow-lg">
+    <header
+      class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <!-- Logo -->
+      <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+        <img src="/img/recipe_logo.png" width="130" height="130" alt="Cooking Blog - Made with Node.js" />
+      </a>
+
+      <!-- Menu -->
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li>
+          <a href="/" class="nav-link px-2 link-secondary">Home</a>
+        </li>
+        <li>
+          <a href="/about" class="nav-link px-2 link-secondary">About</a>
+        </li>
+        <li>
+          <a href="/submit-recipe" class="nav-link px-2 link-secondary">Submit</a>
+        </li>
+        <li>
+          <a href="/contact" class="nav-link px-2 link-secondary">Contact</a>
+        </li>
+      </ul>
+
+      <div class="col-md-3 text-end">
+
+        <!-- Log in button -->
+        <a class="log-in-and-sign-up-btn" href="/auth/log-in">
+          Log In
         </a>
+        &nbsp;&nbsp;
+        <!-- Sign up button -->
+        <a class="log-in-and-sign-up-btn"href="/auth/sign-up">
+          Sign Up
+        </a>
+      </div>
 
-        <!-- Menu -->
-        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-          <li>
-            <a href="/" class="nav-link px-2 link-secondary">Home</a>
-          </li>
-          <li>
-            <a href="/about" class="nav-link px-2 link-secondary">About</a>
-          </li>
-          <li>
-            <a href="/submit-recipe" class="nav-link px-2 link-secondary"
-              >Submit</a
-            >
-          </li>
-          <li>
-            <a href="/contact" class="nav-link px-2 link-secondary">Contact</a>
-          </li>
-        </ul>
+      <!-- Search bar -->
+      <div class="col-md-3 text-end">
+        <form method="GET" action="/search">
+          <input type="search" name="searchTerm" class="form-control" placeholder="Search..." aria-label="Search" />
+        </form>
+      </div>
+    </header>
 
-        <!-- Search bar -->
-        <div class="col-md-3 text-end">
-          <form method="GET" action="/search">
-            <input
-              type="search"
-              name="searchTerm"
-              class="form-control"
-              placeholder="Search..."
-              aria-label="Search"
-            />
-          </form>
-        </div>
-      </header>
+    <main>
+      <%- body -%>
+    </main>
 
-      <main><%- body -%></main>
+    <!-- Footer -->
+    <footer class="px-4 py-5 my-5 text-center">
+      <p>Built by Erin Chan.</p>
+      <div class="socials">
+        <a href="https://github.com/erinerinchan" target="_blank"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/erinchanhk/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="https://www.instagram.com/1infiniteloopy/?hl=en" target="_blank"><i
+            class="fa-brands fa-instagram"></i></a>
+        <a href="https://twitter.com/ErinChanHK" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+      </div>
+    </footer>
+  </div>
 
-      <!-- Footer -->
-      <footer class="px-4 py-5 my-5 text-center">
-        <p>Built by Erin Chan.</p>
-        <div class="socials">
-          <a href="https://github.com/erinerinchan" target="_blank"
-            ><i class="fa-brands fa-github"></i
-          ></a>
-          <a href="https://www.linkedin.com/in/erinchanhk/" target="_blank"
-            ><i class="fa-brands fa-linkedin"></i
-          ></a>
-          <a
-            href="https://www.instagram.com/1infiniteloopy/?hl=en"
-            target="_blank"
-            ><i class="fa-brands fa-instagram"></i
-          ></a>
-          <a href="https://twitter.com/ErinChanHK" target="_blank"
-            ><i class="fa-brands fa-twitter"></i
-          ></a>
-        </div>
-      </footer>
-    </div>
+  <!-- Bootstrap script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Font Awesome script -->
+  <script src="https://kit.fontawesome.com/6b4e02abc2.js" crossorigin="anonymous"></script>
+  <!-- Local JS file -->
+  <script src="/js/script.js"></script>
+</body>
 
-    <!-- Bootstrap script -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Font Awesome script -->
-    <script
-      src="https://kit.fontawesome.com/6b4e02abc2.js"
-      crossorigin="anonymous"
-    ></script>
-    <!-- Local JS file -->
-    <script src="/js/script.js"></script>
-  </body>
 </html>

@@ -18,6 +18,16 @@ a {
   color: var(--bs-dark);
 }
 
+/* Log in and sign up buttons */
+.log-in-and-sign-up-btn {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 10px;
+  background: grey;
+  border-radius: 8px;
+}
+
 /* Recipe cards */
 .category__link {
   text-align: center;
@@ -48,4 +58,34 @@ a {
 .category__img img {
   width: 100%;
   object-fit: cover;
+}
+
+/* Google authentication */
+.google-btn {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 10px;
+  background: #1b76f2;
+  border-radius: 8px;
+}
+
+/* Facebook authentication */
+.facebook-btn {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 10px;
+  background: #3b5998;
+  border-radius: 8px;
+}
+
+/* Facebook authentication */
+.github-btn {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 10px;
+  background: black;
+  border-radius: 8px;
 }

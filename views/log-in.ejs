@@ -1,0 +1,47 @@
+<!-- Message -->
+<br>
+<h1 class="display-5 fw-bold text-center">Welcome back!</h1>
+
+<!-- Log in form -->
+<br>
+<br> 
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form action="/log-in" enctype="multipart/log-in-data" method="POST">
+
+      <!-- Google, Facebook and Github authentication -->
+      <div class="col-12">
+        <a class="google-btn" href="/auth/google"><i class="fa-brands fa-google"></i>&nbsp;&nbsp;&nbsp;Log in with Google</a>&nbsp;&nbsp;
+        <a class="facebook-btn" href="/auth/facebook"><i class="fa-brands fa-facebook-f"></i>&nbsp;&nbsp;&nbsp;Log in with Facebook</a>&nbsp;&nbsp;&nbsp;
+        <a class="github-btn" href="/auth/github"><i class="fa-brands fa-github"></i>&nbsp;&nbsp;&nbsp;Log in with Github</a>
+      </div>
+      <br>
+      <!-- Line -->
+      <div class="col-12">
+        <hr>
+      </div>
+      <br>
+
+      <!-- Username -->
+      <div class="col-12">
+        <label for="username" class="form-label">Username / Email</label>
+        <input type="text" name="username" id="username" class="form-control" />
+      </div>
+
+      <!-- Password -->
+      <br>
+      <div class="col-12">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" name="password" id="password" class="form-control" />
+      </div>
+      <br>
+
+      <!-- Log in button -->
+      <div class="col-12">
+        <button type="log-in" class="btn btn-primary btn-dark" value="log-in-message">
+          Log In
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
