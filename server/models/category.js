@@ -14,9 +14,9 @@ const categorySchema = new mongoose.Schema({
   recipes: [
     {
       type: "ObjectId",
-      ref: "recipe",
+      ref: "recipe"
     },
   ],
 });
 
-module.exports = categorySchema
+module.exports = categorySchema;

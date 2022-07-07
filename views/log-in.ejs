@@ -1,47 +1,53 @@
 <!-- Message -->
 <br>
-<h1 class="display-5 fw-bold text-center">Welcome back!</h1>
+<h1 class="display-5 fw-bold text-center">Log in</h1>
+<%- include ("./messages"); %>
+<br>
+<br>
 
 <!-- Log in form -->
-<br>
-<br> 
 <div class="row justify-content-center">
-  <div class="col-8">
-    <form action="/log-in" enctype="multipart/log-in-data" method="POST">
+  <div class="col-8 text-center">
 
-      <!-- Google, Facebook and Github authentication -->
-      <div class="col-12">
-        <a class="google-btn" href="/auth/google"><i class="fa-brands fa-google"></i>&nbsp;&nbsp;&nbsp;Log in with Google</a>&nbsp;&nbsp;
-        <a class="facebook-btn" href="/auth/facebook"><i class="fa-brands fa-facebook-f"></i>&nbsp;&nbsp;&nbsp;Log in with Facebook</a>&nbsp;&nbsp;&nbsp;
-        <a class="github-btn" href="/auth/github"><i class="fa-brands fa-github"></i>&nbsp;&nbsp;&nbsp;Log in with Github</a>
-      </div>
-      <br>
-      <!-- Line -->
-      <div class="col-12">
-        <hr>
-      </div>
-      <br>
+    <!-- Google, Facebook and Github authentication -->
+    <div class="form-group">
+      <a class="google-btn" href=""><i class="fa-brands fa-google"></i>&nbsp;&nbsp;&nbsp;Log in with
+        Google</a>&nbsp;&nbsp;
+      <a class="facebook-btn" href=""><i class="fa-brands fa-facebook-f"></i>&nbsp;&nbsp;&nbsp;Log in with
+        Facebook</a>&nbsp;&nbsp;&nbsp;
+      <a class="github-btn" href=""><i class="fa-brands fa-github"></i>&nbsp;&nbsp;&nbsp;Log in with Github</a>
+    </div>
 
-      <!-- Username -->
-      <div class="col-12">
-        <label for="username" class="form-label">Username / Email</label>
-        <input type="text" name="username" id="username" class="form-control" />
-      </div>
+  </div>
+</div>
 
-      <!-- Password -->
-      <br>
-      <div class="col-12">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" name="password" id="password" class="form-control" />
-      </div>
-      <br>
+<div class="row mt-5">
+  <div class="col-md-6 m-auto">
 
-      <!-- Log in button -->
-      <div class="col-12">
-        <button type="log-in" class="btn btn-primary btn-dark" value="log-in-message">
-          Log In
-        </button>
-      </div>
+    <form action="/users/log-in" method="POST"></form>
+
+    <!-- Username -->
+    <div class="form-group">
+      <label for="username">Username / Email</label>
+      <input type="username" name="username" id="username" class="form-control" placeholder="Enter Username" />
+    </div>
+
+    <!-- Password -->
+    <br>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password"/>
+    </div>
+    <br>
+
+    <!-- Log in button -->
+    <div class="form-group">
+      <button type="log-in" class="btn btn-primary btn-dark">
+        Log In
+      </button>
+    </div>
+
     </form>
+
   </div>
 </div>

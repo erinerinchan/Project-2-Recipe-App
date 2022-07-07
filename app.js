@@ -6,9 +6,6 @@ const flash = require("connect-flash");
 const morgan = require("morgan");
 const session = require('express-session')
 
-const authRoutes = require("./server/routes/authRoutes.js");
-const passportSetup = require('./config/passport-setup');
-
 // The instance that hosts the server
 const app = express();
 
@@ -30,6 +27,7 @@ app.use(expressLayouts);
 // Printing out request information
 app.use(morgan("tiny"));
 
+// Express session
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
@@ -37,6 +35,7 @@ app.use(session({
   cookie: { secure: true }
 }));
 
+// Connect flash
 app.use(flash());
 
 // Parsing url queries to req.query
@@ -45,11 +44,16 @@ app.use(express.urlencoded({ extended: true }));
 // Parsing multi-parts to req.body and req.files
 app.use(require("./server/_helpers/parse-data"));
 
-// Defining homepage route for the server
-app.use("/", require("./server/routes/recipeRoutes.js"));
+// Global variables
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  next();
+})
 
-// Defining authentication route for the server
-app.use('/auth', authRoutes);
+// Defining routes for the server
+app.use("/", require("./server/routes/recipeRoutes.js"));
+app.use("/users", require("./server/routes/users"));
 
 // Starting the server
 app.listen(port, () => console.log(`Listening to port ${port}`));

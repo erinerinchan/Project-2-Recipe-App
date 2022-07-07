@@ -13,8 +13,10 @@ mongoose.connect(process.env.MONGODB_URI, {
 //Models
 const Category = mongoose.model("category", require('./category'));
 const Recipe = mongoose.model("recipe", require('./recipe'));
+const User = mongoose.model("User", require('./User'));
 
 module.exports = {
   Category,
-  Recipe
+  Recipe,
+  User
 }
