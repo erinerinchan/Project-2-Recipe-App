@@ -84,6 +84,7 @@ https://floating-gorge-73473.herokuapp.com/
 ### 2. In the new window’s terminal
 
 - Run `npm install`
+- Run `npm start` or `npm run dev`
 
 ### 3. In the `Project-2-Recipe-App` folder
 
