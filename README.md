@@ -42,6 +42,7 @@
 
 - [aws-sdk](https://www.npmjs.com/package/aws-sdk)
 - [axios](https://www.npmjs.com/package/axios)
+- [bcryptjs](https://www.npmjs.com/package/bcryptjs)
 - [body-parser](https://www.npmjs.com/package/body-parser)
 - [connect-flash](https://www.npmjs.com/package/connect-flash)
 - [cookie-parser](https://www.npmjs.com/package/cookie-parser)
