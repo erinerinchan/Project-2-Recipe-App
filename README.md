@@ -61,6 +61,7 @@
 - [morgan](https://www.npmjs.com/package/morgan)
 - [nodemailer](https://www.npmjs.com/package/nodemailer)
 - [nodemon](https://www.npmjs.com/package/nodemon)
+- [passport](https://www.npmjs.com/package/passport)
 
 ### Database
 
