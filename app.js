@@ -27,22 +27,24 @@ app.use(expressLayouts);
 // Printing out request information
 app.use(morgan("tiny"));
 
-// Express session
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
-}));
-
-// Connect flash
-app.use(flash());
-
 // Parsing url queries to req.query
 app.use(express.urlencoded({ extended: true }));
 
 // Parsing multi-parts to req.body and req.files
 app.use(require("./server/_helpers/parse-data"));
+
+// Express session
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    secure: process.env.NODE_ENV === 'production'
+  }
+}));
+
+// Connect flash
+app.use(flash());
 
 // Global variables
 app.use((req, res, next) => {
