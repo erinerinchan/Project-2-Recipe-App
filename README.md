@@ -74,6 +74,7 @@
 - [API routes](https://docs.google.com/spreadsheets/d/1i1E82H9rPMkHY67rk9PUZV7OFFbpw13j3U0Z9-R-0Hk/edit#gid=0)
 ## Link to the project
 https://floating-gorge-73473.herokuapp.com/
+https://recipe-blog-pevp.onrender.com/
 
 ## Installation
 
